@@ -2,28 +2,29 @@ package com.kubra.weather8.Model;
 
 public class Main {
 
-    private double temp ;
-    private int pressure;
-    private int humidity ;
-    private double temp_min;
-    private double temp_max ;
+    public float temp ;
+    public float pressure ;
+    public int humidity ;
+    public double temp_min ;
+    public double temp_max ;
 
     public Main() {
     }
 
-    public double getTemp() {
+
+    public float getTemp() {
         return temp;
     }
 
-    public void setTemp(double temp) {
+    public void setTemp(float temp) {
         this.temp = temp;
     }
 
-    public int getPressure() {
+    public float getPressure() {
         return pressure;
     }
 
-    public void setPressure(int pressure) {
+    public void setPressure(float pressure) {
         this.pressure = pressure;
     }
 

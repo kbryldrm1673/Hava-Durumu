@@ -6,5 +6,6 @@
     <color name="textColorPrimary">#ffffff</color>
     <color name="windowBackground">#ffffff</color>
     <color name="navigationBarcolor">#000000</color>
+    <color name="beyazRenk">#FFFFFF</color>
 
 </resources>

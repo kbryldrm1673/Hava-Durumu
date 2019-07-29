@@ -1,13 +1,12 @@
 package com.kubra.weather8.Model;
 
-import android.media.Image;
 
 public class Weather {
 
-    private int id ;
-    private String main ;
-    private String description ;
-    private String icon ;
+    public int id ;
+    public String main ;
+    public String description ;
+    public String icon ;
 
     public Weather() {
     }

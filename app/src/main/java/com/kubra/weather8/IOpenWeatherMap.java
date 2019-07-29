@@ -1,6 +1,7 @@
 package com.kubra.weather8;
 
 
+import com.kubra.weather8.Model.WeatherForecastResult;
 import com.kubra.weather8.Model.WeatherResult;
 
 import io.reactivex.Observable;
@@ -13,5 +14,18 @@ public interface IOpenWeatherMap {
                                                  @Query("lon") String lng,
                                                  @Query("appid") String appid,
                                                  @Query("units") String unit);
+
+    @GET("forecast")
+    Observable<WeatherForecastResult> getForecastWeatherByLatLng(@Query("lat") String lat,
+                                                                 @Query("lon") String lng,
+                                                                 @Query("appid") String appid,
+                                                                 @Query("units") String unit);
+
+
+
+
+
+
+
 
 }

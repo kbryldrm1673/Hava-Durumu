@@ -4,6 +4,7 @@ package com.kubra.weather8;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,7 @@ public class TodayFragment extends Fragment {
         Retrofit retrofit= RetrofitClient.getInstance();
         mService=retrofit.create(IOpenWeatherMap.class);
 
-        }
+    }
 
 
 
@@ -89,8 +90,8 @@ public class TodayFragment extends Fragment {
 
         weather_panel=(LinearLayout) itemView.findViewById(R.id.weather_panel);
         loading=(ProgressBar) itemView.findViewById(R.id.loading);
-        
-        
+
+
         getWeatherInformation();
 
         return  itemView;
@@ -98,48 +99,49 @@ public class TodayFragment extends Fragment {
 
     private void getWeatherInformation() {
 
+        //Log.d("todayFragment " ,Common.current_location.getLatitude());
         compositeDisposable.add(mService.getWeatherByLatLng(String.valueOf(Common.current_location.getLatitude()),
                 String.valueOf(Common.current_location.getLongitude()),
                 Common.APP_ID,
                 "metric")
-                 .subscribeOn(Schedulers.io())
-                  .observeOn(AndroidSchedulers.mainThread())
-                  .subscribe(new Consumer<WeatherResult>() {
-                                 @Override
-                                 public void accept(WeatherResult weatherResult) throws Exception {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<WeatherResult>() {
+                               @Override
+                               public void accept(WeatherResult weatherResult) throws Exception {
 
-                                     Picasso.get().load(new StringBuilder("https://openweathermap.org/img/wn/")
-                                             .append(weatherResult.getWeather().get(0).getIcon())
-                                             .append(".png").toString()).into(img_weather);
+                                   Picasso.get().load(new StringBuilder("https://openweathermap.org/img/wn/")
+                                           .append(weatherResult.getWeather().get(0).getIcon())
+                                           .append(".png").toString()).into(img_weather);
 
-                                     txt_city_name.setText(weatherResult.getName());
-                                     txt_description.setText(new StringBuilder("Weather in")
-                                     .append(weatherResult.getName()).toString());
-
-
-                                     txt_temperature.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getTemp())).append("°C").toString());
-
-                                     txt_date_time.setText(Common.convertUnixToDate(weatherResult.getDt()));
-
-                                     txt_pressure.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getPressure())).append("hpa").toString());
-                                     txt_humidity.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getHumidity())).append("%").toString());
-                                     txt_sunrise.setText(Common.convertUnixToHour(weatherResult.getSys().getSunrise()));
-                                     txt_sunset.setText(Common.convertUnixToHour(weatherResult.getSys().getSunset()));
-                                     txt_geo_coord.setText(new StringBuilder("[").append(weatherResult.getCoord().toString()).append("]").toString());
+                                   txt_city_name.setText(weatherResult.getName());
+                                   txt_description.setText(new StringBuilder(" ")//Değiştirdim
+                                           .append(weatherResult.getName()).toString());
 
 
-                                     weather_panel.setVisibility(View.VISIBLE);
-                                     loading.setVisibility(View.GONE);
+                                   txt_temperature.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getTemp())).append("°C").toString());
 
-                                 }
-                             }, new Consumer<Throwable>() {
-                                 @Override
-                                 public void accept(Throwable throwable) throws Exception {
-                                     Toast.makeText(getActivity(),""+throwable.getMessage(),Toast.LENGTH_SHORT).show();
-                                 }
-                             }
+                                   txt_date_time.setText(Common.convertUnixToDate(weatherResult.getDt()));
 
-                  ));
+                                   txt_pressure.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getPressure())).append("hpa").toString());
+                                   txt_humidity.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getHumidity())).append("%").toString());
+                                   txt_sunrise.setText(Common.convertUnixToHour(weatherResult.getSys().getSunrise()));
+                                   txt_sunset.setText(Common.convertUnixToHour(weatherResult.getSys().getSunset()));
+                                   txt_geo_coord.setText(new StringBuilder("[").append(weatherResult.getCoord().toString()).append("]").toString());
+
+
+                                   weather_panel.setVisibility(View.VISIBLE);
+                                   loading.setVisibility(View.GONE);
+
+                               }
+                           }, new Consumer<Throwable>() {
+                               @Override
+                               public void accept(Throwable throwable) throws Exception {
+                                   Toast.makeText(getActivity(),""+throwable.getMessage(),Toast.LENGTH_SHORT).show();
+                               }
+                           }
+
+                ));
     }
 
 

@@ -2,14 +2,31 @@ package com.kubra.weather8.Model;
 
 public class Sys {
 
-    private double message;
-    private String country;
-    private int sunrise;
-    private int sunset;
+    public int type ;
+    public int id ;
+    public double message ;
+    public String country ;
+    public int sunrise ;
+    public int sunset ;
 
     public Sys() {
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public double getMessage() {
         return message;

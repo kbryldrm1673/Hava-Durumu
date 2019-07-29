@@ -1,9 +1,9 @@
 package com.kubra.weather8.Model;
 
-class Wind {
+public class Wind {
 
-    private double speed ;
-    private double deg ;
+    public double speed ;
+    public double deg ;
 
     public Wind() {
     }

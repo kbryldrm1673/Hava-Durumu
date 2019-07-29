@@ -1,6 +1,6 @@
 package com.kubra.weather8.Model;
 
-class Clouds {
+public class Clouds {
 
     private int all;
 

@@ -2,8 +2,8 @@ package com.kubra.weather8.Model;
 
 public class Coord {
 
-    private double lon;
-    private double lat;
+    public double lon;
+    public double lat;
 
     public Coord() {
     }
